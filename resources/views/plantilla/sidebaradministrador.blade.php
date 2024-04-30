@@ -13,8 +13,11 @@
                         <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-briefcase"  ></i> Restaurante</a>
                         <ul class="nav-dropdown-items">
                             <li @click="menu=13" class="nav-item">
-                        <a class="nav-link" href="#"><i class="icon-list" style="font-size: 11px;"></i> Restaurante</a>
-                    </li>
+                                <a class="nav-link" href="#"><i class="icon-list" style="font-size: 11px;"></i> Restaurante</a>
+                            </li>
+                            <li @click="menu=14" class="nav-item">
+                                <a class="nav-link" href="#"><i class="icon-list" style="font-size: 11px;"></i> Sucursales</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="nav-item nav-dropdown">
