@@ -836,6 +836,7 @@ export default {
             let me = this;
             console.log ("cliente ",this.cliente)
             console.log("mesa ",this.mesa)
+            console.log("Carrito ",this.arrayDetalle);
             axios.post('/venta/registrar', {
                 'idcliente': this.idcliente,
                 'cliente': this.cliente,
@@ -938,8 +939,10 @@ export default {
             if (me.paraLlevar){
                 if (!me.cliente) me.errorMostrarMsjVenta.push("Ingrese el Nombre de un Cliente");
             }
+            if(me.paraLlevar ==false){
+                if(me.mesa === 0 && !me.mesa) me.errorMostrarMsjVenta.push("Ingresar Numero de Mesa")
+            }
             if (me.tipo_comprobante == 0) me.errorMostrarMsjVenta.push("Seleccione el Comprobante");
-            if (!me.impuesto) me.errorMostrarMsjVenta.push("Ingrese el impuesto de compra");
             if (me.arrayDetalle.length <= 0) me.errorMostrarMsjVenta.push("Ingrese detalles");
 
             if (me.errorMostrarMsjVenta.length) me.errorVenta = 1;
