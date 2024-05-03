@@ -70,10 +70,6 @@
                 @include('plantilla.sidebaradministrador')
             @elseif (Auth::user()->idrol == 2)
                 @include('plantilla.sidebarvendedor')
-            @elseif (Auth::user()->idrol == 3)
-                @include('plantilla.sidebaralmacenero')
-            @elseif (Auth::user()->idrol == 4)
-                @include('plantilla.sidebarencargado')
             @else
 
             @endif
