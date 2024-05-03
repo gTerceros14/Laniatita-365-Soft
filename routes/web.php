@@ -27,36 +27,6 @@ Route::group(['middleware' => ['auth']], function () {
         return view('contenido/contenido');
     })->name('main');
 
-    Route::group(['middleware' => ['Almacenero']], function () {
-        Route::get('/categoria', 'CategoriaController@index');
-        Route::post('/categoria/registrar', 'CategoriaController@store');
-        Route::put('/categoria/actualizar', 'CategoriaController@update');
-        Route::put('/categoria/desactivar', 'CategoriaController@desactivar');
-        Route::put('/categoria/activar', 'CategoriaController@activar');
-        Route::get('/categoria/selectCategoria', 'CategoriaController@selectCategoria');
-
-        Route::get('/articulo', 'ArticuloController@index');
-        Route::post('/articulo/registrar', 'ArticuloController@store');
-        Route::put('/articulo/actualizar', 'ArticuloController@update');
-        Route::put('/articulo/desactivar', 'ArticuloController@desactivar');
-        Route::put('/articulo/activar', 'ArticuloController@activar');
-        Route::get('/articulo/buscarArticulo', 'ArticuloController@buscarArticulo');
-        Route::get('/articulo/listarArticulo', 'ArticuloController@listarArticulo');
-        Route::get('/articulo/listarPdf', 'ArticuloController@listarPdf')->name('articulos_pdf');
-
-
-        Route::get('/proveedor', 'ProveedorController@index');
-        Route::post('/proveedor/registrar', 'ProveedorController@store');
-        Route::put('/proveedor/actualizar', 'ProveedorController@update');
-        Route::get('/proveedor/selectProveedor', 'ProveedorController@selectProveedor');
-
-        Route::get('/ingreso', 'IngresoController@index');
-        Route::post('/ingreso/registrar', 'IngresoController@store');
-        Route::put('/ingreso/desactivar', 'IngresoController@desactivar');
-        Route::get('/ingreso/obtenerCabecera', 'IngresoController@obtenerCabecera');
-        Route::get('/ingreso/obtenerDetalles', 'IngresoController@obtenerDetalles');
-
-    });
 
     Route::group(['middleware' => ['Vendedor']], function () {
         Route::get('/cliente', 'ClienteController@index');
@@ -287,13 +257,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/precios/registrar', 'PrecioController@store');
         Route::put('/precios/{id}/{accion}', 'PrecioController@cambiarEstado');
 
-        //ALMACENES
-        Route::get('/almacen', 'AlmacenController@index');
-        Route::post('/almacen/registrar', 'AlmacenController@store');
-        Route::put('/almacen/editar', 'AlmacenController@update');
-
-        Route::get('/almacen/selectAlmacen', 'AlmacenController@selectAlmacen');
-        Route::get('/almacen/selectAlmacenDest', 'AlmacenController@selectAlmacenDestino');
+      
 
         //inventarios
         //Route::get('/inventarios', 'InventarioController@index');
