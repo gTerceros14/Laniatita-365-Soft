@@ -111,26 +111,9 @@
                                             Comidas
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownComidas">
-                                            <button @click="listarArticulo('', '3')" :class="{ 'btn-primary': criterioA === '3' }" class="dropdown-item">Especialidades</button>
-                                            <button @click="listarArticulo('', '2')" :class="{ 'btn-primary': criterioA === '2' }" class="dropdown-item">Extras</button>
-                                            <button @click="listarArticulo('', '1')" :class="{ 'btn-primary': criterioA === '1' }" class="dropdown-item">Guarniciones</button>
+                                            <button v-for="subcategoria in arrayBuscador" :key="subcategoria.id" @click="listarArticulo('', subcategoria.id)" :class="{ 'btn-primary': criterioA === subcategoria.id }" class="dropdown-item">{{ subcategoria.nombre }}</button>
 
                                             <!-- Agrega más botones para otras subcategorías de comidas aquí -->
-                                        </div>
-                                    </div>
-                                    <div class="dropdown">
-                                        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownBebidas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Bebidas
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownBebidas">
-                                            <button @click="listarArticulo('', '4')" :class="{ 'btn-primary': criterioA === '4' }" class="dropdown-item">Refrescos</button>
-                                            <button @click="listarArticulo('', '5')" :class="{ 'btn-primary': criterioA === '5' }" class="dropdown-item">Special Night Menu</button>
-                                            <button @click="listarArticulo('', '6')" :class="{ 'btn-primary': criterioA === '6' }" class="dropdown-item">Cerveza</button>
-                                            <button @click="listarArticulo('', '7')" :class="{ 'btn-primary': criterioA === '7' }" class="dropdown-item">Cerveza Artesanal</button>
-                                            <button @click="listarArticulo('', '8')" :class="{ 'btn-primary': criterioA === '8' }" class="dropdown-item">Botellas</button>
-                                            <button @click="listarArticulo('', '9')" :class="{ 'btn-primary': criterioA === '9' }" class="dropdown-item">Vinos</button>
-
-                                            <!-- Agrega más botones para otras subcategorías de bebidas aquí -->
                                         </div>
                                     </div>
 
@@ -447,6 +430,7 @@ export default {
             arrayCliente: [],
             arrayDetalle: [],
             arrayProductos: [],
+            arrayBuscador: [],
             mostrarTipoComprobante: false,
             listado: 1,
             modal: 0,
@@ -924,6 +908,18 @@ export default {
             me.idAlmacen = 1;
             console.log(me.idAlmacen);
         },
+        listarLinea(page, buscar, criterio) {
+            let me = this;
+            var url = '/categoria?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
+            axios.get(url).then(function (response) {
+                var respuesta = response.data;
+                me.arrayBuscador = respuesta.categorias.data;
+                me.pagination = respuesta.pagination;
+            })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
         validarVenta() {
             let me = this;
             me.errorVenta = 0;
@@ -1218,7 +1214,8 @@ export default {
         window.addEventListener('keydown', this.atajoButton);
         this.obtenerDatosUsuario();
         this.listarArticulo(1, this.buscar, this.criterio);
-        this.listarArticulo('', '3')
+        this.listarArticulo('', '1')
+        this.listarLinea('1','','nombreLinea')
         
     }
 }
