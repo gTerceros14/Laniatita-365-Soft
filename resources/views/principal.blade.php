@@ -8,7 +8,7 @@
     <meta name="description" content="Sistema Ventas Laravel Vue Js- Compartiendocodigos">
     <meta name="author" content="compartiendocodigos.net">
     <meta name="keyword" content="Sistema ventas Laravel Vue Js, Sistema compras Laravel Vue Js">
-    <link rel="shortcut icon" href="img/Logo-LosVegas.jpg">
+    <link rel="shortcut icon" href="img/Logo-Lananita.jpg">
     <meta name="userId" content="{{ Auth::check() ? Auth::user()->id : ''}}">
     <title>Sistema POS</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -31,7 +31,7 @@
             <notification :notifications="notifications"></notification>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                    <img src="img/usuarios/Logo-LosVegas2.jpg" class="img-avatar" alt="Fotografia">
+                    <img src="img/Logo-Lananita.jpg" class="img-avatar" alt="Fotografia">
                     <span class="d-md-down-none">{{Auth::user()->usuario}}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
@@ -43,12 +43,12 @@
                     <i class="fa fa-user-circle"></i> Perfil</a>
 
 
-                    @if(Auth::check())
+                    <!--@if(Auth::check())
                         @if(Auth::user()->idrol == 1)
                             <a class="dropdown-item" href="#" @click="menu=21">
                             <i class="fa fa-wrench"></i> Configuración</a>
                         @endif
-                    @endif
+                    @endif -->
 
                     <a class="dropdown-item" href="{{ route('logout') }}" 
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

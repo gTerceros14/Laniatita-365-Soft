@@ -27,25 +27,12 @@ class ArticuloController extends Controller
 
         if ($buscar == '') {
             $articulos = Articulo::join('categorias', 'articulos.idcategoria', '=', 'categorias.id')
-                ->join('proveedores', 'articulos.idproveedor', '=', 'proveedores.id')
-                ->join('personas', 'proveedores.id', '=', 'personas.id')
-                ->join('industrias', 'articulos.idindustria', '=', 'industrias.id')
-                ->join('marcas', 'articulos.idmarca', '=', 'marcas.id')
-                ->join('grupos', 'articulos.idgrupo', '=', 'grupos.id')
-                ->join('medidas', 'articulos.idmedida', '=', 'medidas.id')
+
 
                 ->select(
                     'articulos.id',
                     'articulos.idcategoria',
-                    'articulos.idproveedor',
-                    //aumente 7 julio
-                    'articulos.idindustria',
-                    //aumente 7 julio
-                    'articulos.idmarca',
-                    //aumente 7 julio
-                    'articulos.idgrupo',
-                    //aumente 7 julio
-                    'articulos.idmedida',
+
                     'articulos.codigo',
                     'articulos.nombre',
                     'articulos.nombre_generico',
@@ -58,10 +45,6 @@ class ArticuloController extends Controller
                     'articulos.precio_costo_paq',
 
                     'categorias.nombre as nombre_categoria',
-                    'industrias.nombre as nombre_industria',
-                    'marcas.nombre as nombre_marca',
-                    'grupos.nombre_grupo',
-                    'medidas.descripcion_medida',
                     //aumente 5 julio
 
                     'articulos.precio_uno',
@@ -71,19 +54,13 @@ class ArticuloController extends Controller
 
                     'articulos.precio_venta',
                     'articulos.stock',
-                    'personas.nombre as nombre_proveedor',
                     'articulos.descripcion',
                     'articulos.condicion',
                     'articulos.fotografia'
                 )
                 ->orderBy('articulos.id', 'desc')->paginate(5);
         } else {
-            $articulos = Articulo::join('proveedores', 'articulos.idproveedor', '=', 'proveedores.id')
-                ->join('personas', 'proveedores.id', '=', 'personas.id')
-                ->join('categorias', 'articulos.idcategoria', '=', 'categorias.id')
-                ->join('industrias', 'articulos.idindustria', '=', 'industrias.id')
-                ->join('marcas', 'articulos.idmarca', '=', 'marcas.id')
-                ->join('grupos', 'articulos.idgrupo', '=', 'grupos.id')
+            $articulos = Articulo::join('categorias','articulos.idcategoria', '=', 'categorias.id')
                 ->select(
                     'articulos.id',
                     'articulos.idcategoria',
@@ -94,11 +71,6 @@ class ArticuloController extends Controller
                     'articulos.precio_list_unid',
                     'articulos.precio_costo_unid',
                     'articulos.precio_costo_paq',
-
-                    'categorias.nombre as nombre_categoria',
-                    'industrias.nombre as nombre_industria',
-                    'marcas.nombre as nombre_marca',
-                    'grupos.nombre_grupo',
                     //aumente 5 julio
 
                     'articulos.precio_uno',
@@ -108,7 +80,6 @@ class ArticuloController extends Controller
 
                     'articulos.precio_venta',
                     'articulos.stock',
-                    'personas.nombre as nombre_proveedor',
                     'articulos.descripcion',
                     'articulos.condicion',
                     'articulos.fotografia'
@@ -250,11 +221,6 @@ class ArticuloController extends Controller
             return redirect('/');
         $articulo = new Articulo();
         $articulo->idcategoria = $request->idcategoria;
-        $articulo->idmarca ='185';
-        $articulo->idindustria = '1';
-        $articulo->idgrupo = '1'; //aumente 12 junio
-
-        $articulo->idmedida = '1'; //new
 
         $articulo->codigo = '1';
 
@@ -273,7 +239,7 @@ class ArticuloController extends Controller
         $articulo->costo_compra = '0.00'; //new
 
         $articulo->stock = '1000';
-        $articulo->idproveedor = '2';
+       
         $articulo->precio_costo_unid = '0.00';
         $articulo->precio_costo_paq = '0.00';
         $articulo->descripcion = $request->descripcion;
@@ -298,10 +264,6 @@ class ArticuloController extends Controller
         }
         Log::info('DATOS REGISTRO ARTICULO:', [
             'idcategoria' => $request->idcategoria,
-            'idmarca' => $request->idmarca,
-            'idindustria' => $request->idindustria,
-            'idgrupo' => $request->idgrupo,
-            'idproveedor' => $request->idproveedor,
             'codigo' => $request->codigo,
             'nombre' => $request->nombre,
             'nombre_generico' => $request->nombre_generico,
@@ -329,10 +291,6 @@ class ArticuloController extends Controller
             $articulo = Articulo::findOrFail($request->id);
             $articulo->idcategoria = $request->idcategoria;
 
-            $articulo->idmarca = $request->idmarca;
-            $articulo->idindustria = $request->idindustria;
-            $articulo->idgrupo = $request->idgrupo;
-
             $articulo->codigo = $request->codigo;
             $articulo->nombre = $request->nombre;
 
@@ -348,8 +306,6 @@ class ArticuloController extends Controller
             $articulo->stock = $request->stock;
             $articulo->descripcion = $request->descripcion;
             //$articulo->fecha_vencimiento = $request->fecha_vencimiento;
-            $articulo->idproveedor = $request->idproveedor;
-            $articulo->idmedida = $request->idmedida;
             //$articulo->condicion = '1';
 
             $nombreimagen = " ";
@@ -373,10 +329,6 @@ class ArticuloController extends Controller
             }
             Log::info('DATOS ACTUALIZADOS DE ARTICULO:', [
                 'idcategoria' => $request->idcategoria,
-                'idmarca' => $request->idmarca,
-                'idindustria' => $request->idindustria,
-                'idgrupo' => $request->idgrupo,
-                'idproveedor' => $request->idproveedor,
                 'codigo' => $request->codigo,
                 'nombre' => $request->nombre,
                 'nombre_generico' => $request->nombre_generico,

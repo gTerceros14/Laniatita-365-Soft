@@ -37,7 +37,7 @@
             </form>
         </div>
         <div class="right">
-            <img class="portada" src="img/Logo-LosVegas.jpg" alt="">
+            <img class="portada" src="img/Logo-Lananita.jpg" alt="">
         </div>
     </div>
 </div>

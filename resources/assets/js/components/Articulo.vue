@@ -40,10 +40,10 @@
                                     <th>Código</th>
                                     <th>Nombre</th>
                                     <!-- <th>Presio1</th> -->
-                                    <th v-for="precio in precios" :key="precio.id">{{ precio.nombre_precio }}</th>
+                                    
                                     
                                     <!-- <th v-if="rolUsuario === 1">Presio venta</th> -->
-                                    <th v-if="rolUsuario === 1 && mostrarCostos === 1">Precio venta</th>
+                                    <th v-if="rolUsuario === 1">Precio venta</th>
 
                                     <th>Categorìa</th>
                                     <th>Descripción</th>
@@ -70,16 +70,9 @@
                                         </template>
                                     <td v-text="articulo.id"></td>
                                     <td v-text="articulo.nombre"></td>
-                                    <td v-for="(precio, index) in precios" :key="precio.id">
-                                        <!-- Mostrar el precio correspondiente según el índice -->
-                                        <span v-if="index === 0">{{ articulo.precio_uno }}</span>
-                                        <span v-if="index === 1">{{ articulo.precio_dos }}</span>
-                                        <span v-if="index === 2">{{ articulo.precio_tres }}</span>
-                                        <span v-if="index === 3">{{ articulo.precio_cuatro }}</span>
-                                    </td>
 
                                     <!-- <td v-if="rolUsuario === 1" v-text="articulo.precio_venta"></td> -->
-                                    <td v-if="rolUsuario === 1 && mostrarCostos === 1" v-text="articulo.precio_venta"></td>
+                                    <td v-if="rolUsuario === 1" v-text="articulo.precio_venta"></td>
 
                                     <td v-text="articulo.nombre_categoria"></td>
 
@@ -244,7 +237,7 @@
                             </div>
                            
                                                         
-                            <div v-for="(precio, index) in precios" :key="precio.id" class="form-group row">
+                            <div style="display: none;" v-for="(precio, index) in precios" :key="precio.id" class="form-group row">
                                 <label class="col-md-3 form-control-label" for="text-input" style="color: blue;">{{ precio.nombre_precio }}</label>
                                 <div class="col-md-4">
                                     <input v-if="index === 0" type="text" class="form-control" placeholder="Precio" v-model="precio_uno">

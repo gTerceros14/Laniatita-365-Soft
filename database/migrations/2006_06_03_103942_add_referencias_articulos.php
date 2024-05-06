@@ -15,11 +15,11 @@ class AddReferenciasArticulos extends Migration
     {
         Schema::table('articulos', function (Blueprint $table) {
             //
-            $table->integer('idmarca')->unsigned();
-            $table->integer('idindustria')->unsigned();
+            //$table->integer('idmarca')->unsigned();
+            //$table->integer('idindustria')->unsigned();
 
-            $table->foreign('idmarca')->references('id')->on('marcas');
-            $table->foreign('idindustria')->references('id')->on('industrias');
+            //$table->foreign('idmarca')->references('id')->on('marcas');
+            //$table->foreign('idindustria')->references('id')->on('industrias');
         });
     }
 

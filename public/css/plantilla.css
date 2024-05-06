@@ -166,7 +166,7 @@ sup {
   top: -.5em; }
 
 a {
-  color: #610500;
+  color: #03045e;
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects; }
@@ -7609,12 +7609,12 @@ base-chart.chart {
   background: #20a8d8; }
 
 .modal-primary .modal-content {
-  border-color: #610500; }
+  border-color: #03045e; }
   
 
 .modal-primary .modal-header {
   color: #fff;
-  background-color: #610500; }
+  background-color: #03045e; }
 
 .modal-secondary .modal-content {
   border-color: #a4b7c1; }
@@ -7695,7 +7695,7 @@ base-chart.chart {
   height: 55px;
   padding: 0;
   margin: 0;
-  background-color: #b86500;
+  background-color: #0077b6;
   border-bottom: 1px solid #c2cfd6; }
   .app-header.navbar .navbar-brand {
     display: inline-block;
@@ -7704,9 +7704,9 @@ base-chart.chart {
     padding: 0.5rem 1rem;
     margin-right: 0;
     background-color: #fff;
-    background-image: url("../img/Logo-LosVegas2.png");
+    background-image: url("../img/Logo-Lananita.jpg");
     background-color: transparent;
-    background-image: url("../img/Logo-LosVegas2.png");
+    background-image: url("../img/Logo-Lananita.jpg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
@@ -7821,7 +7821,7 @@ base-chart.chart {
   padding: 0;
   color: #fff;
   font-size: 14px;
-  background: #610500;
+  background: #03045e;
  }
   .sidebar .sidebar-close {
     position: absolute;
@@ -7934,7 +7934,7 @@ base-chart.chart {
         color: #20a8d8; }
     .sidebar .nav-link:hover, .sidebar .navbar .dropdown-toggle:hover, .navbar .sidebar .dropdown-toggle:hover {
       color: #fff;
-      background: #d40b00; }
+      background: #48cae4; }
       .sidebar .nav-link:hover i, .sidebar .navbar .dropdown-toggle:hover i, .navbar .sidebar .dropdown-toggle:hover i {
         color: #fff; }
       .sidebar .nav-link:hover.nav-dropdown-toggle::before, .sidebar .navbar .dropdown-toggle:hover.nav-dropdown-toggle::before, .navbar .sidebar .dropdown-toggle:hover.nav-dropdown-toggle::before {

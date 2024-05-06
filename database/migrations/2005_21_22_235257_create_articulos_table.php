@@ -16,10 +16,10 @@ class CreateArticulosTable extends Migration
         Schema::create('articulos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('idcategoria')->unsigned(); //Linea
-            $table->integer('idgrupo')->unsigned(); //aumente 14 junio
-            $table->integer('idproveedor')->unsigned(); //aumente 5 juio
+            //$table->integer('idgrupo')->unsigned(); //aumente 14 junio
+            //$table->integer('idproveedor')->unsigned(); //aumente 5 juio
 
-            $table->integer('idmedida')->unsigned(); //new
+           // $table->integer('idmedida')->unsigned(); //new
 
             $table->string('codigo', 50)->nullable();
             $table->string('nombre', 100)->unique(); //Nombre comercial
@@ -41,12 +41,12 @@ class CreateArticulosTable extends Migration
             $table->timestamps();
 
             $table->foreign('idcategoria')->references('id')->on('categorias');
-            $table->foreign('idgrupo')->references('id')->on('grupos');
-            $table->foreign('idproveedor')->references('id')->on('proveedores');
+            //$table->foreign('idgrupo')->references('id')->on('grupos');
+            //$table->foreign('idproveedor')->references('id')->on('proveedores');
 
             //new
             $table->decimal('costo_compra', 10, 2);
-            $table->foreign('idmedida')->references('id')->on('medidas');
+            //$table->foreign('idmedida')->references('id')->on('medidas');
         });
     }
 
