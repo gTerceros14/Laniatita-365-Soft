@@ -15,8 +15,6 @@ class CreateInventariosTable extends Migration
     {
         Schema::create('inventarios', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('idalmacen')->unsigned();
-            $table->foreign('idalmacen')->references('id')->on('almacens');
             $table->integer('idarticulo')->unsigned();
             $table->foreign('idarticulo')->references('id')->on('articulos');
             $table->date('fecha_vencimiento');

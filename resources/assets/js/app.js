@@ -19,14 +19,13 @@ window.Vue = require("vue");
 
 Vue.component("empresa", require("./components/Empresa.vue"));
 Vue.component("sucursal", require("./components/Sucursal.vue"));
-Vue.component("moneda", require("./components/Moneda.vue"));
 Vue.component("caja", require("./components/Caja.vue"));
 Vue.component("categoria", require("./components/Categoria.vue"));
 Vue.component("articulo", require("./components/Articulo.vue"));
 
 Vue.component("ingreso", require("./components/Ingreso.vue"));
 Vue.component("cliente", require("./components/Cliente.vue"));
-Vue.component("proveedor", require("./components/Proveedor.vue"));
+
 Vue.component("rol", require("./components/Rol.vue"));
 Vue.component("user", require("./components/User.vue"));
 Vue.component("venta", require("./components/Venta.vue"));
@@ -48,23 +47,15 @@ Vue.component(
   require("./components/productos/ModalAgregarProductos.vue")
 );
 // Pedidos a proveedor
-Vue.component(
-  "detallepedidosproveedor",
-  require("./components/PedidosProveedor/DetallePedidoProveedor.vue")
-);
 
-Vue.component("marca", require("./components/Marca.vue"));
+
+
 Vue.component("linea", require("./components/Linea.vue"));
-Vue.component("industria", require("./components/Industria.vue"));
 Vue.component("configuracion", require("./components/Configuracion.vue"));
-Vue.component(
-  "cotizacioncompras",
-  require("./components/CotizacionCompras.vue")
-);
-Vue.component("cotizacionventas", require("./components/CotizacionVentas.vue"));
+
+
 
 Vue.component("inventarios", require("./components/Inventario.vue"));
-Vue.component("grupos", require("./components/Grupo.vue"));
 Vue.component(
   "monitoreoproductos",
   require("./components/MonitoreoProductos.vue")
@@ -81,8 +72,7 @@ Vue.component(
   "productosporvencerse",
   require("./components/ProductosPorVencerse.vue")
 );
-Vue.component("traspasoproducto", require("./components/Traspaso.vue"));
-Vue.component("medidas", require("./components/Medidas.vue"));
+
 Vue.component("factura", require("./components/Factura.vue"));
 Vue.component(
   "sincronizacionactividades",
@@ -100,10 +90,7 @@ Vue.component(
   "sincronizarproductosservicios",
   require("./components/SincronizarProductosServicios.vue")
 );
-Vue.component(
-  "sincronizarmotivoanulacion",
-  require("./components/SincronizarMotivoAnulacion.vue")
-);
+
 Vue.component(
   "sincronizareventossignificativos",
   require("./components/SincronizarEventosSignificativos.vue")

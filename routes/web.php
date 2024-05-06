@@ -70,13 +70,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/categoria/selectCategoria', 'CategoriaController@selectCategoria');
 
 
-        Route::get('/marca', 'MarcaController@index');
-        Route::post('/marca/registrar', 'MarcaController@store');
-        Route::put('/marca/actualizar', 'MarcaController@update');
-        Route::put('/marca/desactivar', 'MarcaController@desactivar');
-        Route::put('/marca/activar', 'MarcaController@activar');
-
-
         Route::get('/articulo', 'ArticuloController@index');
         Route::post('/articulo/registrar', 'ArticuloController@store');
         Route::post('/articulo/actualizar', 'ArticuloController@update');
@@ -90,11 +83,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/articulo/listarArticuloPedido', 'ArticuloController@listPedProve'); //aumente esto 21 sept
 
 
-        Route::get('/proveedor', 'ProveedorController@index');
-        Route::post('/proveedor/registrar', 'ProveedorController@store');
-        Route::put('/proveedor/actualizar', 'ProveedorController@update');
-        Route::get('/proveedor/selectProveedor', 'ProveedorController@selectProveedor');
-
+       
         Route::get('/cliente', 'ClienteController@index');
         Route::post('/cliente/registrar', 'ClienteController@store');
         Route::put('/cliente/actualizar', 'ClienteController@update');
@@ -117,27 +106,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/venta/paqueteFactura', 'VentaController@paqueteFactura');
         Route::post('/venta/enviarPaquete', 'VentaController@enviarPaquete');
         Route::post('/venta/validarPaquete', 'VentaController@validacionRecepcionPaqueteFactura');
-        //credito_venta
-        Route::get('/credito', 'CreditoVentaController@index');
-        Route::post('/credito/registrar', 'CreditoVentaController@store');
-        Route::put('/credito/actualizar', 'CreditoVentaController@update');
-        Route::get('/credito/eliminar', 'CreditoVentaController@destroy');
-        // cuota_credito
-        Route::get('/cuota', 'CuotasCreditoController@index');
-        Route::post('/cuota/registrar', 'CuotasCreditoController@store');
-        Route::put('/cuota/actualizar', 'CuotasCreditoController@update');
-        Route::get('/cuota/eliminar', 'CuotasCreditoController@destroy');
-
-        
-// cotizacionventa
-        Route::get('/cotizacionventa', 'CotizacionVentaController@index');
-        Route::post('/cotizacionventa/registrar', 'CotizacionVentaController@store');
-        Route::put('/cotizacionventa/desactivar', 'CotizacionVentaController@desactivar');
-        Route::get('/cotizacionventa/obtenerCabecera', 'CotizacionVentaController@obtenerCabecera');
-        Route::get('/cotizacionventa/obtenerDetalles', 'CotizacionVentaController@obtenerDetalles');
-        Route::get('/cotizacionventa/pdf/{id}', 'CotizacionVentaController@pdf')->name('venta_pdf');
-        Route::put('/cotizacionventa/activar', 'CotizacionVentaController@activar');
-        Route::put('/cotizacionventa/eliminar', 'CotizacionVentaController@delete');
+      
 
         Route::get('/rol', 'RolController@index');
         Route::get('/rol/selectRol', 'RolController@selectRol');
@@ -180,13 +149,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/puntoVenta/cerrar', 'VentaController@cierrePuntoVenta');
         Route::put('/puntoVenta/cambioEstado', 'PuntoVentaController@cambioEstado');
 
-        //Listar Moneda
-        Route::get('/moneda', 'MonedaController@index');
-        Route::post('/moneda/registrar', 'MonedaController@store');
-        Route::put('/moneda/activar', 'MonedaController@activar');
-        Route::put('/moneda/desactivar', 'MonedaController@desactivar');
-        Route::put('/moneda/actualizar', 'MonedaController@update');
-
+       
+       
         //APERTURA/CIERRE CAJA
         //Listar
         Route::get('/caja', 'CajaController@index');
@@ -217,23 +181,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/factura/sincronizarParametricaUnidadMedida', 'VentaController@sincronizarParametricaUnidadMedida');
         Route::get('/factura/obtenerDatosMotivoAnulacion', 'FacturaController@obtenerDatosMotivoAnulacion');
     
-
-        //--INDUSTRIA--
-        //registrar
-        Route::post('/industria/registrar', 'IndustriaController@store');
-        Route::get('/industria', 'IndustriaController@index');
-        Route::put('/industria/activar', 'IndustriaController@activar');
-        Route::put('/industria/desactivar', 'IndustriaController@desactivar');
-        Route::put('/industria/actualizar', 'IndustriaController@update');
-
-        //MEDIDAS
-        Route::get('/medida', 'MedidaController@index');
-        Route::post('/medida/registrar', 'MedidaController@store');
-        Route::put('/medida/actualizar', 'MedidaController@update');
-        Route::put('/medida/desactivar', 'MedidaController@desactivar');
-        Route::put('/medida/activar', 'MedidaController@activar');
-        Route::get('/medida/selectCategoria', 'MedidaController@selectMedida');
-
         //Obtener último numero de comprobante
         Route::get('/ruta-a-tu-endpoint-laravel-para-obtener-ultimo-comprobante', 'VentaController@obtenerUltimoComprobante');
         
@@ -246,19 +193,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/backup', 'BackupDbController@createBackup');
 
 
-        //grupo
-        Route::get('/grupos', 'GrupoController@index');
-        Route::post('/grupos/registrar', 'GrupoController@store');
-        Route::put('/grupos/actualizar', 'GrupoController@update');
-
-        //precio
-        Route::get('/precios', 'PrecioController@indexanctivo');
-        Route::get('/preciosactivos', 'PrecioController@indexactivo'); //activos
-        Route::post('/precios/registrar', 'PrecioController@store');
-        Route::put('/precios/{id}/{accion}', 'PrecioController@cambiarEstado');
-
-      
-
         //inventarios
         //Route::get('/inventarios', 'InventarioController@index');
         Route::post('/inventarios/registrar', 'InventarioController@store');
@@ -269,8 +203,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/inventarios/listarReportePorVencerExcel', 'InventarioController@listarReportePorVencerExcel');
         Route::get('/inventarios/listarReporteVencidosExcel', 'InventarioController@listarReporteVencidosExcel');
         Route::get('/inventarios/listarReporteBajoStockExcel', 'InventarioController@listarReporteBajoStockExcel');
-        //listado para seleccionar producto En TRASPASO
-        Route::get('/inventariosTraspaso', 'InventarioController@indextraspaso'); //listar en traspaso para seleccionar el arTiculo de invenTario
+       //listar en traspaso para seleccionar el arTiculo de invenTario
         Route::get('/inventarios/itemLote/{tipo}', 'InventarioController@indexItemLote'); //listato por filtro
         //saldostosk
         Route::get('/inventarios/saldostock', 'InventarioController@indexsaldostock'); //listar el saldo_stock
@@ -289,12 +222,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::put('/eventos/cambioEstadoEvento', 'EventosSignificativosController@cambioEstadoEvento');
         Route::post('/factura/eventosSignificativos', 'VentaController@registroEventoSignificativo');
 
-        //PEDIDO A PROVEEDOR--
-        Route::post('/registrar/pedidoprovee', 'PedidoProvController@store')->name('PEDIDO');
-        Route::get('/pedidoProveedor', 'PedidoProvController@indexpedido');
-        Route::get('/pedido/obtPediPrv', 'PedidoProvController@indexPedProv');
-        Route::put('/editar/pedidoprovee', 'PedidoProvController@editar');
-        Route::delete('/pedido/proveedor', 'PedidoProvController@eliminar');
+   
         //-----seleccionar usuario , roles REGISTROS DE VENTAS
         Route::get('/roles/selectRoles', 'VentaController@selectRoles');
 
