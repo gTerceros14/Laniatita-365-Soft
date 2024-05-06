@@ -15,12 +15,13 @@ class CreateVentasTable extends Migration
     {
         Schema::create('ventas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('idcliente')->unsigned();
-            $table->foreign('idcliente')->references('id')->on('personas');
+           // $table->integer('idcliente')->unsigned();
+            $table->integer('mesa');
+            $table->string('observacion', 255);
+           // $table->foreign('idcliente')->references('id')->on('personas');
             $table->integer('idusuario')->unsigned();
             $table->foreign('idusuario')->references('id')->on('users');
-            $table->integer('idtipo_pago')->unsigned();
-            $table->foreign('idtipo_pago')->references('id')->on('tipo_pagos');
+
             $table->string('tipo_comprobante', 20);
             $table->string('serie_comprobante', 7)->nullable();
             $table->string('num_comprobante', 10);
