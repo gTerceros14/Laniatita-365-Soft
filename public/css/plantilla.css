@@ -7704,9 +7704,9 @@ base-chart.chart {
     padding: 0.5rem 1rem;
     margin-right: 0;
     background-color: #fff;
-    background-image: url("../img/Logo-Lananita.jpg");
+    background-image: url("../img/Logo-Lanatita2.png");
     background-color: transparent;
-    background-image: url("../img/Logo-Lananita.jpg");
+    background-image: url("../img/Logo-Lanatita2.png");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
@@ -7718,7 +7718,7 @@ base-chart.chart {
       background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%2329363d' stroke-width='2.25' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); }
   .app-header.navbar .navbar-toggler-icon {
     height: 23px;
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23ffffff' stroke-width='2.25' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); }
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23000000' stroke-width='2.25' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); }
   .app-header.navbar .navbar-nav {
     -ms-flex-direction: row;
         flex-direction: row;
@@ -7756,8 +7756,8 @@ base-chart.chart {
   .navbar-brand:focus, .navbar-brand:hover {
     color: #29363d; }
 
-.navbar-nav .nav-link, .navbar-nav .navbar .dropdown-toggle, .navbar .navbar-nav .dropdown-toggle {
-  color: #ffffff; }
+.navbar-nav .nav-link, .navbar-nav .navbar .dropdown- toggle, .navbar .navbar-nav .dropdown-toggle {
+  color: #000000; }
   .navbar-nav .nav-link:focus, .navbar-nav .navbar .dropdown-toggle:focus, .navbar .navbar-nav .dropdown-toggle:focus, .navbar-nav .nav-link:hover, .navbar-nav .navbar .dropdown-toggle:hover, .navbar .navbar-nav .dropdown-toggle:hover {
     color: #29363d; }
 
