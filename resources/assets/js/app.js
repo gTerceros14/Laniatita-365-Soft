@@ -5,12 +5,11 @@
  */
 
 import Vue from "vue";
-
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 require("./bootstrap");
-
 window.$ = window.jQuery = require("jquery");
 window.Vue = require("vue");
-
+Vue.use(BootstrapVue)
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

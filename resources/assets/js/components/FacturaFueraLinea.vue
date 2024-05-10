@@ -1,14 +1,11 @@
+
 <template>
     <main class="main">
-        <!-- Breadcrumb -->
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Ventas</a></li>
-        </ol>
         <div class="container-fluid">
             <!-- Ejemplo de tabla Listado -->
             <div class="card">
                 <div class="card-header">
-                    <i class="fa fa-align-justify"></i> Ventas Fuera de Línea
+                    <i class="fa fa-align-justify"></i> Ventas
                     <button type="button" @click="mostrarDetalle()" class="btn btn-secondary">
                         <i class="icon-plus"></i>&nbsp;Nueva Venta 
                     </button>
@@ -20,75 +17,70 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <select class="form-control col-md-3" v-model="criterio">
+                                        <option value="" disabled selected>Seleccione</option>
                                         <option value="tipo_comprobante">Tipo Comprobante</option>
                                         <option value="num_comprobante">Número Comprobante</option>
                                         <option value="fecha_hora">Fecha-Hora</option>
+                                        <option value="usuario">Usuario</option>
                                     </select>
-                                    <input type="text" v-model="buscar" @keyup="listarVenta(1, buscar, criterio)"
-                                        class="form-control" placeholder="Texto a buscar">
-                                    <!--button type="submit" @click="listarVenta(1, buscar, criterio)" class="btn btn-primary"><i
-                                            class="fa fa-search"></i> Buscar</button-->
+                                    <input type="text" v-model="buscar" @keyup="listarVenta(1, buscar, criterio)" class="form-control" placeholder="Texto a buscar">
+                                    <!--button type="submit" @click="listarVenta(1, buscar, criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button-->
                                 </div>
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-sm">
-                                <thead>
-                                    <tr>
-                                        <th>Opciones</th>
-                                        <th>Usuario</th>
-                                        <th>Cliente</th>
-                                        <th>Tipo Comprobante</th>
-                                        <th>Número Comprobante</th>
-                                        <th>Fecha Hora</th>
-                                        <th>Total</th>
-                                        <th>Estado</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <tr v-for="(venta) in arrayVenta" :key="venta.id">
-                                    <td>
-                                    <button type="button" @click="verVenta(venta.id)" class="btn btn-success btn-sm">
-                                        <i class="icon-eye"></i>
-                                    </button> &nbsp;
-
-                                    <template v-if="venta.estado == 'Registrado'">
-                                        <button type="button" class="btn btn-danger btn-sm" @click="desactivarVenta(venta.id)">
-                                        <i class="icon-trash"></i>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-sm custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Opciones</th>
+                                            <th>Usuario</th>
+                                            <th>Cliente</th>
+                                            <th>Tipo Comprobante</th>
+                                            <th>Número Comprobante</th>
+                                            <th>Fecha Hora</th>
+                                            <th>Total</th>
+                                            <th>Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="(venta) in arrayVenta" :key="venta.id">
+                                        <td>
+                                        <button type="button" @click="verVenta(venta.id)" class="btn btn-success btn-sm">
+                                            <i class="icon-eye"></i>
                                         </button> &nbsp;
-                                    </template>
 
-                                    <button type="button" @click="imprimirTicket(venta.id)" class="btn btn-info btn-sm" >
-                                        Imprimir Ticket
-                                    </button>
+                                        <template v-if="venta.estado == 'Registrado'">
+                                            <button type="button" class="btn btn-danger btn-sm" @click="desactivarVenta(venta.id)">
+                                            <i class="icon-trash"></i>
+                                            </button> &nbsp;
+                                        </template>
 
-                                    </td>
-                                    <td v-text="venta.usuario"></td>
-                                    <td v-text="venta.cliente"></td>
-                                    <td v-text="venta.tipo_comprobante"></td>
-                                    <td v-text="venta.num_comprobante"></td>
-                                    <td v-text="venta.fecha_hora"></td>
-                                    <td v-text="venta.total"></td>
-                                    <td v-text="venta.estado"></td>
-                                </tr>
-                                </tbody>
+                                        <button type="button" @click="imprimirTicket(venta.id)" class="btn btn-info btn-sm" >
+                                            Imprimir Ticket
+                                        </button>
 
-                            </table>
-                        </div>
-                        <nav>
+                                        </td>
+                                        <td v-text="venta.usuario"></td>
+                                        <td v-text="venta.cliente"></td>
+                                        <td v-text="venta.tipo_comprobante"></td>
+                                        <td v-text="venta.num_comprobante"></td>
+                                        <td v-text="venta.fecha_hora"></td>
+                                        <td v-text="venta.total"></td>
+                                        <td v-text="venta.estado"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <nav>                      
                             <ul class="pagination">
                                 <li class="page-item" v-if="pagination.current_page > 1">
-                                    <a class="page-link" href="#"
-                                        @click.prevent="cambiarPagina(pagination.current_page - 1, buscar, criterio)">Ant</a>
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1, buscar, criterio)">Ant</a>
                                 </li>
-                                <li class="page-item" v-for="page in pagesNumber" :key="page"
-                                    :class="[page == isActived ? 'active' : '']">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(page, buscar, criterio)"
-                                        v-text="page"></a>
+                                <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(page, buscar, criterio)" v-text="page"></a>
                                 </li>
                                 <li class="page-item" v-if="pagination.current_page < pagination.last_page">
-                                    <a class="page-link" href="#"
-                                        @click.prevent="cambiarPagina(pagination.current_page + 1, buscar, criterio)">Sig</a>
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1, buscar, criterio)">Sig</a>
                                 </li>
                             </ul>
                         </nav>
@@ -110,12 +102,13 @@
                                         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownComidas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             Comidas
                                         </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownComidas">
-                                            <button v-for="subcategoria in arrayBuscador" :key="subcategoria.id" @click="listarArticulo('', subcategoria.id)" :class="{ 'btn-primary': criterioA === subcategoria.id }" class="dropdown-item">{{ subcategoria.nombre }}</button>
-
-                                            <!-- Agrega más botones para otras subcategorías de comidas aquí -->
-                                        </div>
+                                      <div class="dropdown-menu" aria-labelledby="dropdownComidas">
+                                                                                  <button v-for="subcategoria in arrayBuscador" :key="subcategoria.id" @click="listarArticulo('', subcategoria.id)" :class="{ 'btn-primary': criterioA === subcategoria.id }" class="dropdown-item">{{ subcategoria.nombre }}</button>
+                                      
+                                                                                  <!-- Agrega más botones para otras subcategorías de comidas aquí -->
+                                                                              </div>
                                     </div>
+                                    
 
                                 </div>
                                 </div>
@@ -123,19 +116,30 @@
                         
                             <h3>Productos</h3>
                             <div class="row">
-                                
-                                <div class="col-md-4 mb-3 " v-for="articulo in arrayArticulo" :key="articulo.id " >
-                                    <button class="btn btn-block btn-ligth border texto-largo" @click="agregarDetalleModal(articulo)">
-                                        
-                                            <img :src="'img/articulo/'+ articulo.fotografia" width="150" height="150" class="card-img-top">
-                                            <div class="card-body d-flex flex-column justify-content-center align-items-center texto-largo"  style="padding-top: 8px; padding-bottom: 4px; ">
-                                                <h5 class="card-tittle texto-largo">{{ articulo.nombre }}</h5>
-                                                <p class="card-text texto-largo" >{{ articulo.medida }}</p>
-                                                    <p class="card-text texto-largo">Bs.{{ articulo.precio_venta }}</p>
-                                            </div>
-                                    </button>    
-                                </div>
-                            </div>    
+    <div class="col-md-4 mb-3" v-for="articulo in arrayArticulo" :key="articulo.id">
+        <div class="card h-100 border-0 shadow">
+            <button class="btn btn-block p-0 position-relative" @click="agregarDetalleModal(articulo)">
+                <div class="position-relative overflow-hidden">
+                    <b-img v-if="articulo.fotografia" :src="'img/articulo/' + articulo.fotografia + '?t=' + new Date().getTime()" fluid-grow class="card-img-top rounded-lg object-fit-cover" style="width: 100px; height: 100px; object-fit: contain;">
+                        <div class="img-overlay position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center text-white" @mouseover="zoomImage = true" @mouseleave="zoomImage = false" :class="{ 'd-none': !zoomImage }">
+                            <span class="fa fa-search-plus"></span>
+                        </div>
+                    </b-img>
+                </div>
+                <div class="card-body text-center pt-3">
+                    <h5 class="card-title mb-2">{{ articulo.nombre }}</h5>
+                    <p class="card-text mb-1">{{ articulo.medida }}</p>
+                    <p class="card-text font-weight-bold mb-0">Bs. {{ articulo.precio_venta }}</p>
+                </div>
+                <div class="card-hover-effect position-absolute top-0 start-0 w-100 h-100"></div>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
+   
                         </div>
                     </div>
                     
@@ -180,9 +184,9 @@
                                     </label>
                                 </div>
                             </div>
-                            <input type="hidden" id="nombreCliente" class="form-control" readonly value="Sin Nombre">
-                            <input type="hidden" id="idcliente" class="form-control" readonly value="7">
-                            <input type="hidden" id="tipo_documento" class="form-control" readonly value="1">
+                            <input type="hidden" id="nombreCliente" class="form-control" readonly >
+                            <input type="hidden" id="idcliente" class="form-control" readonly >
+                            <input type="hidden" id="tipo_documento" class="form-control" readonly >
                             <input type="hidden" id="complemento_id" class="form-control" v-model="complemento_id"
                                 ref="complementoIdRef" readonly>
                             <input type="hidden" id="usuarioAutenticado" class="form-control" v-model="usuarioAutenticado"
@@ -261,17 +265,10 @@
                                                 {{ (detalle.precio * detalle.cantidad - detalle.descuento).toFixed(2) }}
                                             </td>
                                         </tr>
+                                    
+                       
                                         <tr style="background-color: #CEECF5;">
-                                            <td colspan="3" align="right"><strong>Sub Total: Bs.</strong></td>
-                                            <td id="subTotal">{{ totalParcial=(calcularSubTotal).toFixed(2) }}</td>
-                                        </tr>
-                                        <tr style="background-color: #CEECF5;">
-                                            <td colspan="3" align="right"><strong>Descuento Adicional: Bs.</strong></td>
-                                            <input id="descuentoAdicional" v-model="descuentoAdicional" type="number"
-                                                class="form-control">
-                                        </tr>
-                                        <tr style="background-color: #CEECF5;">
-                                            <td colspan="3" align="right"><strong>Total Neto: Bs.</strong></td>
+                                            <td colspan="3" align="right"><strong>Total: Bs.</strong></td>
                                             <td id="montoTotal">{{ total=(calcularTotal).toFixed(2) }}</td>
                                         </tr>
                                     </tbody>
@@ -300,92 +297,76 @@
                 <!--Ver ingreso-->
                 <template v-else-if="listado == 2">
                     <div class="card-body">
-                        <div class="form-group row border">
-                            <div class="col-md-4">
-                                <strong><label for="">Categoria</label></strong>
-                                <strong><p v-text="categoria" style="color: red;"></p></strong>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <strong><label for="">Cliente</label></strong>
-                                    <p v-text="cliente"></p>
+                            <div class="row border rounded mx-auto my-4 p-3" style="max-width: 800px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                              <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                  <label class="font-weight-bold text-uppercase text-muted mb-1"><strong>Categoría</strong></label>
+                                  <p class="text-danger font-weight-bold mb-0" style="text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);" v-text="categoria"></p>
                                 </div>
-                            </div>
-                            
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <strong><label>Tipo Comprobante</label></strong>
-                                    <p v-text="tipo_comprobante"></p>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                  <label class="font-weight-bold text-uppercase text-muted mb-1"><strong>Cliente</strong></label>
+                                  <p class="mb-0" v-text="cliente"></p>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <strong><label>Número Comprobante</label></strong>
-                                    <p v-text="num_comprobante"></p>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                  <label class="font-weight-bold text-uppercase text-muted mb-1"><strong>Tipo Comprobante</strong></label>
+                                  <p class="mb-0" v-text="tipo_comprobante"></p>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <strong><label>Numero Mesa</label></strong>
-                                    <p v-text="mesa"></p>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                  <label class="font-weight-bold text-uppercase text-muted mb-1"><strong>Número Comprobante</strong></label>
+                                  <p class="mb-0" v-text="num_comprobante"></p>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <strong><label>Observaciones</label></strong>
-                                    <p v-text="observacion"></p>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                  <label class="font-weight-bold text-uppercase text-muted mb-1"><strong>Número Mesa</strong></label>
+                                  <p class="mb-0" v-text="mesa"></p>
                                 </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="form-group mb-3">
+                                  <label class="font-weight-bold text-uppercase text-muted mb-1"><strong>Observaciones</strong></label>
+                                  <p class="mb-0" v-text="observacion"></p>
+                                </div>
+                              </div>
                             </div>
-                        </div>
-                        <div class="form-group row border">
-                            <div class="table-responsive col-md-12">
-                                <table class="table table-bordered table-striped table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th>Artículo</th>
-                                            <th>Precio</th>
-                                            <th>Cantidad</th>
-                                            <th>Descuento</th>
-                                            <th>Subtotal</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody v-if="arrayDetalle.length">
-                                        <tr v-for="detalle in arrayDetalle" :key="detalle.id">
-                                            <td v-text="detalle.articulo">
-                                            </td>
-                                            <td v-text="detalle.precio">
-                                            </td>
-                                            <td v-text="detalle.cantidad">
-                                            </td>
-                                            <td v-text="detalle.descuento">
-                                            </td>
-                                            <td>
-                                                {{ detalle.precio * detalle.cantidad - detalle.descuento }}
-                                            </td>
-                                        </tr>
-                                        <tr style="background-color: #CEECF5;">
-                                            <td colspan="4" align="right"><strong>Total Parcial:</strong></td>
-                                            <td>$ {{ totalParcial=(total - totalImpuesto).toFixed(2) }}</td>
-                                        </tr>
-                                        <tr style="background-color: #CEECF5;">
-                                            <td colspan="4" align="right"><strong>Total Impuesto:</strong></td>
-                                            <td>$ {{ totalImpuesto=(total * impuesto).toFixed(2) }}</td>
-                                        </tr>
-                                        <tr style="background-color: #CEECF5;">
-                                            <td colspan="4" align="right"><strong>Total Neto:</strong></td>
-                                            <td>$ {{ total }}</td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody v-else>
-                                        <tr>
-                                            <td colspan="5">
-                                                No hay articulos agregados
-                                            </td>
-                                        </tr>
-                                    </tbody>
+                            <div class="row border rounded mx-auto my-4 p-3" style="max-width: 900px;">
+                              <div class="table-responsive col-md-12">
+                                <table class="table table-borderless table-hover">
+                                  <thead class="bg-primary text-white">
+                                    <tr>
+                                      <th>Artículo</th>
+                                      <th>Precio</th>
+                                      <th>Cantidad</th>
+                                      <th>Subtotal</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody v-if="arrayDetalle.length">
+                                    <tr v-for="detalle in arrayDetalle" :key="detalle.id">
+                                      <td v-text="detalle.articulo"></td>
+                                      <td v-text="detalle.precio"></td>
+                                      <td v-text="detalle.cantidad"></td>
+                                      <td>{{ detalle.precio * detalle.cantidad }}</td>
+                                    </tr>
+                                    
+                                    <tr class="bg-success text-white font-weight-bold">
+                                      <td colspan="3" class="text-right">Total</td>
+                                      <td>$ {{ total }}</td>
+                                    </tr>
+                                  </tbody>
+                                  <tbody v-else>
+                                    <tr>
+                                      <td colspan="4" class="text-center">No hay artículos agregados</td>
+                                    </tr>
+                                  </tbody>
                                 </table>
+                              </div>
                             </div>
-                        </div>
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <button type="button" @click="ocultarDetalle()" class="btn btn-secondary">Cerrar</button>
@@ -405,6 +386,7 @@ import vSelect from 'vue-select';
 export default {
     data() {
         return {
+        arrayBuscador:[],
             venta_id: 0,
             idcliente: 0,
             usuarioAutenticado: null,
@@ -430,7 +412,6 @@ export default {
             arrayCliente: [],
             arrayDetalle: [],
             arrayProductos: [],
-            arrayBuscador: [],
             mostrarTipoComprobante: false,
             listado: 1,
             modal: 0,
@@ -489,28 +470,27 @@ export default {
 
         //Calcula los elementos de la paginación
         pagesNumber: function () {
-            if (!this.pagination.to) {
-                return [];
-            }
+    if (!this.pagination.to) {
+        return [];
+    }
 
-            var from = this.pagination.current_page - this.offset;
-            if (from < 1) {
-                from = 1;
-            }
+    var from = this.pagination.current_page - this.offset;
+    if (from < 1) {
+        from = 1;
+    }
 
-            var to = from + (this.offset * 2);
-            if (to >= this.pagination.last_page) {
-                to = this.pagination.last_page;
-            }
+    var to = from + (this.offset * 2);
+    if (to >= this.pagination.last_page) {
+        to = this.pagination.last_page;
+    }
 
-            var pagesArray = [];
-            while (from <= to) {
-                pagesArray.push(from);
-                from++;
-            }
-            return pagesArray;
-        },
-
+    var pagesArray = [];
+    while (from <= to) {
+        pagesArray.push(from);
+        from++;
+    }
+    return pagesArray;
+},
         calcularTotal: function () {
             var resultado = 0.0;
             for (var i = 0; i < this.arrayDetalle.length; i++) {
@@ -572,28 +552,26 @@ export default {
         },
 
 
-        listarVenta(page, buscar, criterio) {
-            let me = this;
-            var url = '/venta?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
-            axios.get(url).then(function (response) {
-                var respuesta = response.data;
-                me.arrayVenta = respuesta.ventas.data;
-                me.pagination = respuesta.pagination;
-                me.arrayVenta = me.arrayVenta.map(item => {
+        listarVenta(page, buscar, criterio, per_page = 10) {
+    let me = this;
+    var url = '/venta?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio + '&per_page=' + per_page;
+    axios.get(url)
+        .then(function (response) {
+            var respuesta = response.data;
+            me.arrayVenta = respuesta.ventas.data;
+            me.pagination = respuesta.pagination;
+            me.arrayVenta = me.arrayVenta.map(item => {
                 if (item.cliente === null) {
                     return { ...item, cliente: 'Sin Nombre' };
                 } else {
-                    
                     return item;
                 }
             });
-            })
-                .catch(function (error) {
-                    console.log(error);
-            });
-            
-            
-        },
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+},
         selectCliente(search, loading) {
             let me = this;
             loading(true)
@@ -649,6 +627,18 @@ export default {
                     console.log(error);
                 });
         },
+        listarLinea(page, buscar, criterio) {
+                    let me = this;
+                    var url = '/categoria?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
+                    axios.get(url).then(function (response) {
+                        var respuesta = response.data;
+                        me.arrayBuscador = respuesta.categorias.data;
+                        me.pagination = respuesta.pagination;
+                    })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                },
 
        imprimirTicket(id) {
             axios.get('/venta/imprimir/'+id, { responseType: 'blob' })
@@ -670,13 +660,7 @@ export default {
             //Envia la petición para visualizar la data de esa página
             me.listarVenta(page, buscar, criterio);
         },
-        cambiarPaginaA(page, buscar, criterio) {
-            let me = this;
-            //Actualiza la página actual
-            me.pagination.current_page = page;
-            //Envia la petición para visualizar la data de esa página
-            me.listarArticulo(page, buscar, criterio);
-        },
+       
         encuentra(id) {
             var sw = 0;
             for (var i = 0; i < this.arrayDetalle.length; i++) {
@@ -908,18 +892,6 @@ export default {
             me.idAlmacen = 1;
             console.log(me.idAlmacen);
         },
-        listarLinea(page, buscar, criterio) {
-            let me = this;
-            var url = '/categoria?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
-            axios.get(url).then(function (response) {
-                var respuesta = response.data;
-                me.arrayBuscador = respuesta.categorias.data;
-                me.pagination = respuesta.pagination;
-            })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        },
         validarVenta() {
             let me = this;
             me.errorVenta = 0;
@@ -1100,7 +1072,7 @@ export default {
                 me.num_comprobante = arrayVentaT[0]['num_comprobante'];
                 me.impuesto = arrayVentaT[0]['impuesto'];
                 me.total = arrayVentaT[0]['total'];
-                me.mesa = arrayVentaT[0]['mesa'];
+                me.mesa = (arrayVentaT[0]['mesa']!=null)?  arrayVentaT[0]['mesa']: 'SIN MESA';
                 me.observacion = (arrayVentaT[0]['observacion'] == null ) ? 'SIN OBSERVACION' :arrayVentaT[0]['observacion'] ;
             })
                 .catch(function (error) {
@@ -1208,16 +1180,14 @@ export default {
         });
     },
 
-
     mounted() {
-        this.listarVenta(1, this.buscar, this.criterio);
-        window.addEventListener('keydown', this.atajoButton);
-        this.obtenerDatosUsuario();
-        this.listarArticulo(1, this.buscar, this.criterio);
-        this.listarArticulo('', '1')
-        this.listarLinea('1','','nombreLinea')
-        
-    }
+    this.listarVenta(1, this.buscar, this.criterio, 10);
+    window.addEventListener('keydown', this.atajoButton);
+    this.obtenerDatosUsuario();
+    this.listarArticulo(1, this.buscar, this.criterio);
+    this.listarArticulo('', '1')
+    this.listarLinea('1','','nombreLinea')
+}
 }
 </script>
 <style>    
@@ -1266,5 +1236,15 @@ export default {
         
         
     }
-    
+    .custom-table {
+  width: 100%; /* Ajusta el ancho al 100% del contenedor */
+  margin-bottom: 400px;
+}
+
+    .object-fit-cover {
+        object-fit: cover;
+    }
+
+
+
     </style>

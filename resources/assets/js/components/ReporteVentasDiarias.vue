@@ -14,7 +14,7 @@
                 <div class="form-group row">
                     <div class="col-md-6">
                         <input type="date" v-model="fecha" class="form-control" />
-                        <select v-model="idcategoria" class="form-control">
+                        <select v-model="idcategoria" class="form-control" value="hola">
                             <option value="0" disabled>Seleccione</option>
                             <option value="all">Todas las categorías</option>
                             <option v-for="categoria in arrayCategoria" :key="categoria.id" :value="categoria.id"
@@ -38,13 +38,11 @@
                     </thead>
                     <tbody>
                         <tr v-for="venta in arrayVentas" :key="venta.id">
-                            <td v-text="venta.cliente"></td>
+                            <td v-text="venta.cliente ? venta.cliente : 'Sin Nombre'"></td>
                             <td v-text="venta.articulo"></td>
                             <td v-text="venta.cantidad"></td>
                             <td v-text="venta.precio"></td>
-                            <td>
-                            {{ (venta.precio * venta.cantidad).toFixed(2) }}
-                            </td>
+                            <td v-text="venta.total"></td>
                             <td v-text="venta.num_comprobante"></td>
                         </tr>
                     </tbody>
@@ -79,7 +77,6 @@
 
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import * as XLSX from 'xlsx';
 
 export default {
 data (){
@@ -88,7 +85,7 @@ data (){
         nombre : '',
         descripcion : '',
         fecha: '',
-        idcategoria: null,
+        idcategoria: 'all',
         arrayVentas: [],
         arrayCategoria: [],
         modal : 0,
@@ -113,6 +110,7 @@ computed:{
     },
 
     totalGanado() {
+    this.arrayVentas.reverse();
       // Calcular la suma de los totales de todas las ventas
       return this.arrayVentas.reduce(
         (total, venta) => total + venta.precio * venta.cantidad,
