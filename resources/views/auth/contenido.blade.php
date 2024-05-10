@@ -8,7 +8,7 @@
   <meta name="description" content="Sistema Inventarios Laravel Vue Js">
   <meta name="author" content="compartiendocodigos.net">
   <meta name="keyword" content="Sistema Inventarios Laravel Vue Js">
-  <link rel="shortcut icon" href="img/Logo-LosVegas.jpg">
+  <link rel="shortcut icon" href="img/Logo-Lananita.jpg">
 
   <title>Sistema POS</title>
 

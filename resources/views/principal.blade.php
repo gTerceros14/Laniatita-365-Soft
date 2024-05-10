@@ -8,7 +8,7 @@
     <meta name="description" content="Sistema Ventas Laravel Vue Js- Compartiendocodigos">
     <meta name="author" content="compartiendocodigos.net">
     <meta name="keyword" content="Sistema ventas Laravel Vue Js, Sistema compras Laravel Vue Js">
-    <link rel="shortcut icon" href="img/Logo-Lananita.png">
+    <link rel="shortcut icon" href="img/Logo-Lananita.jpg">
     <meta name="userId" content="{{ Auth::check() ? Auth::user()->id : ''}}">
     <title>Sistema POS</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
